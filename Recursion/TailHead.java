@@ -1,4 +1,6 @@
 public class tailHead {
+
+    // Tail recursion.
     public static void func1(int n) {
         if (n > 0) {
             System.out.println(n);
@@ -6,6 +8,7 @@ public class tailHead {
         }
     }
 
+    // Head recursion.
     public static void func2(int n) {
         if (n > 0) {
             func2(n - 1);
