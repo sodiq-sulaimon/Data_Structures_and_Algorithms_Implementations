@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Array {
+struct Array
+{
     int *A;
     int size;
     int length;
@@ -32,6 +33,6 @@ int main()
     }
     Display(arr);
 
-return 0;
+    return 0;
 }
 
