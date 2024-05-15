@@ -32,7 +32,7 @@ int main()
         scanf("%d", &arr.A[i]);
     }
     Display(arr);
-
+    free(arr.A);
     return 0;
 }
 
