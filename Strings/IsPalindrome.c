@@ -5,13 +5,11 @@ void IsPalindrome(char A[])
     int i =0;
     int j = 0;
 
-    // if first character is uppercase, change to lowercase
-    if (A[0] >= 65 && A[0] <= 90) { // numbers are ascii values
-        A[0] += 32;
-    }
-
-    // move j to the end of the string
+    // move j to the end of the string and change any uppercase letter to lowercase
     for(j=0; A[j] != '\0'; j++) {
+        if (A[j] >= 65 && A[j] <= 90) { // numbers are ascii values
+            A[j] += 32;
+        }
     }
     j -= 1; // move j index to the character before the null character
 
@@ -29,9 +27,9 @@ void IsPalindrome(char A[])
 
 int main() {
 
-    char s1[] = "poop";
+    char s1[] = "pap";
     char s2[] = "coacoa";
-    char s3[] = "madam";
+    char s3[] = "MaDAm";
 //
     IsPalindrome(s1);
     IsPalindrome(s2);
