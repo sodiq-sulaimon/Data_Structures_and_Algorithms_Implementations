@@ -18,7 +18,7 @@ int IsPresent(struct Array *arr, int element) {
     return 0;
 }
 
-// union for unsorted arrays
+// Union for unsorted arrays
 struct Array* Union1(struct Array *arr1, struct Array *arr2) {
     int i=0;
     int j=0;
@@ -45,7 +45,7 @@ struct Array* Union1(struct Array *arr1, struct Array *arr2) {
     arr3 = NULL;
 }
 
-// union for sorted arrays
+// Union for sorted arrays
 struct Array* Union2(struct Array *arr1, struct Array *arr2) {
     int i=0;
     int j=0;
@@ -82,7 +82,7 @@ struct Array* Union2(struct Array *arr1, struct Array *arr2) {
     arr3 = NULL;
 }
 
-// union for sorted arrays
+// Intersection of two arrays
 struct Array* Intersection(struct Array *arr1, struct Array *arr2) {
     int i=0;
     int j=0;
@@ -106,6 +106,39 @@ struct Array* Intersection(struct Array *arr1, struct Array *arr2) {
     }
 
     arr3->length = k;
+    return arr3;
+    free(arr3);
+    arr3 = NULL;
+}
+
+// Difference of two arrays
+struct Array* Difference(struct Array *arr1, struct Array *arr2) {
+    int i=0;
+    int j=0;
+    int k=0;
+
+    struct Array *arr3 = (struct Array *) malloc(sizeof(struct Array));
+    arr3->size = arr1->size + arr2->size;
+    arr3->length = 0;
+
+    while (i < arr1->length && j < arr2->length) {
+        if (arr1->A[i] < arr2->A[j]) {
+            arr3->A[k++] = arr1->A[i++];
+        }
+        else if (arr2->A[j] < arr1->A[i])  {
+            j++;
+        }
+        else if (arr1->A[i] == arr2->A[j]){
+            i++;
+            j++;
+        }
+    }
+    // copy the remaining elements if any
+    for (; i < arr1->length; i++) {
+        arr3->A[k++] = arr1->A[i];
+    }
+    arr3->length = k;
+
     return arr3;
     free(arr3);
     arr3 = NULL;
@@ -139,6 +172,9 @@ int main()
 
     printf("Intersect: \n");
     Display(*arr5);
+
+    printf("Difference: \n");
+    Display(*Difference(&arr3, &arr4));
 
     return 0;
 }
