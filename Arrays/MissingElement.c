@@ -63,7 +63,9 @@ void Missing4(struct Array arr) {
 //    }
 
     for (int i=0; i < arr.length; i++) {
-        H->A[arr.A[i]]++; // assign 1 to the index of H matching the element in the arr
+        if (arr.A[i] < H->size) { // Ensure that the index is within bounds
+            H->A[arr.A[i]]++; // assign 1 to the index of H matching the element in the arr
+        }
     }
     for (int i=0; i < H->length; i++) {
         if (H->A[i] == 0) {
