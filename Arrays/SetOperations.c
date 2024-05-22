@@ -82,6 +82,35 @@ struct Array* Union2(struct Array *arr1, struct Array *arr2) {
     arr3 = NULL;
 }
 
+// union for sorted arrays
+struct Array* Intersection(struct Array *arr1, struct Array *arr2) {
+    int i=0;
+    int j=0;
+    int k=0;
+
+    struct Array *arr3 = (struct Array *) malloc(sizeof(struct Array));
+    arr3->size = arr1->size + arr2->size;
+    arr3->length = 0;
+
+    while (i < arr1->length && j < arr2->length) {
+        if (arr1->A[i] < arr2->A[j]) {
+            i++;
+        }
+        else if (arr1->A[i] > arr2->A[j]) {
+            j++;
+        }
+        else if (arr1->A[i] == arr2->A[j]){
+            arr3->A[k++] = arr1->A[i++];
+            j++;
+        }
+    }
+
+    arr3->length = k;
+    return arr3;
+    free(arr3);
+    arr3 = NULL;
+}
+
 void Display (struct Array arr)
 {
     printf("Array elements: \n");
@@ -93,15 +122,22 @@ void Display (struct Array arr)
 
 int main()
 {
-//    struct Array arr1 = {{3, 2, 4, 6, 8, 10}, 10, 6};
-//    struct Array arr2 = {{6, 4, 9, 8, 1}, 10, 5};
+    struct Array arr1 = {{3, 2, 4, 6, 8, 10}, 10, 6};
+    struct Array arr2 = {{6, 4, 9, 8, 1}, 10, 5};
 //    struct Array *arr3 = Union1(&arr1, &arr2);
 
     struct Array arr3 = {{2, 3, 4, 6, 8, 10}, 10, 6};
     struct Array arr4 = {{1, 4, 6, 8, 9, 12}, 10, 6};
-    struct Array *arr5 = Union2(&arr3, &arr4);
+//    struct Array *arr5 = Union2(&arr3, &arr4);
+    struct Array *arr5 = Intersection(&arr3, &arr4);
 
-//    Display(*arr3);
+    printf("Union of Unsorted Arrays: \n");
+    Display(*Union1(&arr1, &arr2));
+
+    printf("Union of Sorted Arrays: \n");
+    Display(*Union2(&arr3, &arr4));
+
+    printf("Intersect: \n");
     Display(*arr5);
 
     return 0;
