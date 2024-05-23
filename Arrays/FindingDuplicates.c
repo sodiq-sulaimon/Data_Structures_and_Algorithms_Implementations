@@ -39,16 +39,16 @@ void CountDuplicates(struct Array arr) {
 void CheckDuplicates2(struct Array arr) {
     struct Array *H = (struct Array *)malloc(sizeof(struct Array));
 
-    // find the maximum element in the array to create the hash table.
-    int max = 0;
-    for (int i=0; i < arr.length; i++) {
-        if (arr.A[i] > max) {
-            max = arr.A[i];
-        }
-    }
+    // if array is unsorted, find the maximum element in the array to create the hash table.
+//    int max = 0;
+//    for (int i=0; i < arr.length; i++) {
+//        if (arr.A[i] > max) {
+//            max = arr.A[i];
+//        }
+//    }
 
-    H->size = max + 1; // size and length of the hashing should be greater than the max element in the array
-    H->length = max + 1;
+    H->size = arr.A[arr.length - 1] + 1; // size and length of the hashing should is the max element in the array plus 1
+    H->length = H->size;
 
     for (int i=0; i < arr.length; i++) {
         if (arr.A[i] < H->size) { // Ensure that the index is within bounds
@@ -58,7 +58,7 @@ void CheckDuplicates2(struct Array arr) {
 
     for (int i=0; i < H->length; i++) {
         if (H->A[i] > 1) {
-            printf("%d appears %d times\n", i, H->A[i]);
+            printf("\n%d appears %d times", i, H->A[i]);
         }
     }
 };
