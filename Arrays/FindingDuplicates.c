@@ -35,18 +35,11 @@ void CountDuplicates(struct Array arr) {
     }
 };
 
-void Display (struct Array arr)
-{
-    printf("Array elements: \n");
-    for (int i=0; i < arr.length; i++) {
-        printf("%d ", arr.A[i]);
-    }
-    printf("\n");
-};
-
 // finds multiple duplicates in a sorted array with hashing.
 void CheckDuplicates2(struct Array arr) {
     struct Array *H = (struct Array *)malloc(sizeof(struct Array));
+
+    // find the maximum element in the array to create the hash table.
     int max = 0;
     for (int i=0; i < arr.length; i++) {
         if (arr.A[i] > max) {
