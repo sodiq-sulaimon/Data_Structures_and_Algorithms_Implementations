@@ -47,8 +47,15 @@ void Display (struct Array arr)
 // finds multiple duplicates in a sorted array with hashing.
 void CheckDuplicates2(struct Array arr) {
     struct Array *H = (struct Array *)malloc(sizeof(struct Array));
-    H->size = 20; // length of the hashing should be greater than the max element in the array
-    H->length = H->size;
+    int max = 0;
+    for (int i=0; i < arr.length; i++) {
+        if (arr.A[i] > max) {
+            max = arr.A[i];
+        }
+    }
+
+    H->size = max + 1; // size and length of the hashing should be greater than the max element in the array
+    H->length = max + 1;
 
     for (int i=0; i < arr.length; i++) {
         if (arr.A[i] < H->size) { // Ensure that the index is within bounds
@@ -66,12 +73,19 @@ void CheckDuplicates2(struct Array arr) {
 int main()
 {
     struct Array arr1 = {{1, 4, 4, 5, 8, 8, 12, 12, 12, 12}, 10, 10};
+    struct Array arr2 = {{5, 12, 8, 4, 5, 4, 5, 8, 12, 12}, 10, 10};
 
+    printf("Checking Duplicates: \n");
     CheckDuplicates(arr1);
-    printf("\n");
+
+    printf("\nCounting Duplicates Method 1: \n");
     CountDuplicates(arr1);
-    printf("\n");
+
+    printf("\nCounting Duplicates Method 2: ");
     CheckDuplicates2(arr1);
+
+    printf("\nCounting Duplicates in unsorted array with Method 2:\n");
+    CheckDuplicates2(arr2);
 
     return 0;
 }
