@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 struct Array
 {
-    int A[10];
+    int A[20];
     int size;
     int length;
 };
@@ -34,6 +35,34 @@ void CountDuplicates(struct Array arr) {
     }
 };
 
+void Display (struct Array arr)
+{
+    printf("Array elements: \n");
+    for (int i=0; i < arr.length; i++) {
+        printf("%d ", arr.A[i]);
+    }
+    printf("\n");
+};
+
+// finds multiple duplicates in a sorted array with hashing.
+void CheckDuplicates2(struct Array arr) {
+    struct Array *H = (struct Array *)malloc(sizeof(struct Array));
+    H->size = 20; // length of the hashing should be greater than the max element in the array
+    H->length = H->size;
+
+    for (int i=0; i < arr.length; i++) {
+        if (arr.A[i] < H->size) { // Ensure that the index is within bounds
+            H->A[arr.A[i]]++; // increment the index of H matching the element in the arr
+        }
+    }
+
+    for (int i=0; i < H->length; i++) {
+        if (H->A[i] > 1) {
+            printf("%d appears %d times\n", i, H->A[i]);
+        }
+    }
+};
+
 int main()
 {
     struct Array arr1 = {{1, 4, 4, 5, 8, 8, 12, 12, 12, 12}, 10, 10};
@@ -41,6 +70,8 @@ int main()
     CheckDuplicates(arr1);
     printf("\n");
     CountDuplicates(arr1);
+    printf("\n");
+    CheckDuplicates2(arr1);
 
     return 0;
 }
