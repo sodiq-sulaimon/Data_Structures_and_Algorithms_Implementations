@@ -41,13 +41,27 @@ void RDisplay(struct Node * p) {
 
 }
 
+int Count(struct Node * p) {
+    int count = 0;
+
+    while(p != NULL) {
+        count++;
+        p = p->next;
+    }
+    return count;
+}
+
 int main()
 {
     int arr[] = {3, 2, 9, 4, 6};
     Create(arr, 5);
     Display(first);
-    printf("\n");
+
+    printf("\nDisplay with Recursion: \n");
     RDisplay(first);
+
+    printf("\n");
+    printf("Count: %d\n", Count(first));
 
     return 0;
 }
