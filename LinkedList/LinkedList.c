@@ -29,7 +29,6 @@ void Display(struct Node *p) {
         printf("%d ", p->data);
         p = p->next;
     }
-
 }
 
 // Display recursively
@@ -51,17 +50,101 @@ int Count(struct Node * p) {
     return count;
 }
 
+int Add(struct Node * p) {
+    int sum = 0;
+
+    while(p != NULL) {
+        sum = sum + p->data;
+        p = p->next;
+    }
+    return sum;
+}
+
+int Max(struct Node * p) {
+    int max = INT32_MIN; // Minimum integer -32768
+
+    while(p) {
+        if (max < p->data) {
+            max = p->data;
+        }
+        p = p->next;
+    }
+    return max;
+}
+
+int Min(struct Node * p) {
+    int min = INT32_MAX; // Maximum integer
+
+    while(p) {
+        if (min > p->data) {
+            min = p->data;
+        }
+        p = p->next;
+    }
+    return min;
+}
+
+int Search(struct Node * p, int target) {
+    while(p != NULL) {
+        if (p->data == target) {
+            return 1;
+        }
+        p = p->next;
+    }
+    return 0;
+}
+
+// moves the node of the searched element to the front
+struct Node * SearchMoveToHead(struct Node *p, int target) {
+    struct Node *q;
+    while(p != NULL) {
+        if (p->data == target) {
+            q->next = p->next;
+            p->next = first;
+            first = p;
+            return p;
+        }
+        q = p;
+        p = p->next;
+    }
+    return NULL;
+}
+
 int main()
 {
     int arr[] = {3, 2, 9, 4, 6};
     Create(arr, 5);
+    printf("Linkedlist:\n");
+    Display(first);
+
+    struct Node *temp = NULL;
+    temp = SearchMoveToHead(first, 9);
+
+//    temp = SearchTransposition(first, 20);
+
+    if (temp != NULL) {
+        printf("\n%d Found", temp->data);
+    }
+    else
+        printf("\nNot found");
+
+    printf("\nLinkedlist after move-to-head search: \n");
     Display(first);
 
     printf("\nDisplay with Recursion: \n");
     RDisplay(first);
 
-    printf("\n");
-    printf("Count: %d\n", Count(first));
+    printf("\nCount: %d", Count(first));
+
+    printf("\nSum: %d", Add(first));
+
+    printf("\nMax: %d", Max(first));
+
+    printf("\nMin: %d", Min(first));
+
+    printf("\nSearch Result: %d", Search(first, 6));
+    printf("\nSearch Result: %d", Search(first, 23));
+
 
     return 0;
 }
