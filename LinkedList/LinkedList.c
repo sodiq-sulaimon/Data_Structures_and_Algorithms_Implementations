@@ -5,7 +5,7 @@ struct Node
 {
     int data;
     struct Node *next; // Node is self-referential
-}*first = NULL;
+}*first = NULL; // global pointer to node
 
 void Create(int elements[], int n) {
     first = (struct Node *)malloc(sizeof(struct Node));
@@ -110,6 +110,21 @@ struct Node * SearchMoveToHead(struct Node *p, int target) {
     return NULL;
 }
 
+// reverses a linkedlist with sliding pointers
+void Reverse(struct Node *x) {
+    struct Node *p = first;
+    struct Node *q = NULL;
+    struct Node *r = NULL;
+
+    while(p != NULL) {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    first = q;
+}
+
 int main()
 {
     int arr[] = {3, 2, 9, 4, 6};
@@ -119,8 +134,6 @@ int main()
 
     struct Node *temp = NULL;
     temp = SearchMoveToHead(first, 9);
-
-//    temp = SearchTransposition(first, 20);
 
     if (temp != NULL) {
         printf("\n%d Found", temp->data);
@@ -145,6 +158,9 @@ int main()
     printf("\nSearch Result: %d", Search(first, 6));
     printf("\nSearch Result: %d", Search(first, 23));
 
+    Reverse(first);
+    printf("\nReversed linkedlist: \n");
+    Display(first);
 
     return 0;
 }
