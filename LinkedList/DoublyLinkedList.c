@@ -37,10 +37,22 @@ void Display(struct Node *p)
     printf("\n");
 }
 
+
+int Length(struct Node *p) {
+    int len = 0;
+
+    while (p != NULL) {
+        len++;
+        p = p->next;
+    }
+    return len;
+}
+
 int main()
 {
     int arr[] = {8, 1, 12, 5, 10, 16, 2};
     Create(arr, 7);
     printf("Doubly Linkedlist:\n");
     Display(first);
+    printf("Length: %d \n", Length(first));
 }
