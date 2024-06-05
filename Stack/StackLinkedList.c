@@ -27,6 +27,7 @@ int Pop()
     int x = -1;
     if (top == NULL) {
         printf("Stack is empty\n");
+        exit(1);
     }
     else {
         struct Node *t = top;

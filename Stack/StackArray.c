@@ -39,6 +39,7 @@ int Pop(struct Stack *st)
     int x = -1;
     if (isEmpty(st)) {
         printf("\nStack underflow");
+        exit(1);
     }
     else {
         x = st->s[st->top];
@@ -52,6 +53,7 @@ int Peek(struct Stack st, int pos)
     int x = -1;
     if (st.top - pos + 1 < 0 ) { // st.top - pos + 1 maps the pos to index
         printf("\nStack is empty");
+        exit(1);
     }
     else {
         x = st.s[st.top - pos + 1];
@@ -74,6 +76,7 @@ int stackTop(struct Stack st)
 void Display(struct Stack st)
 {   if (st.top == -1) {
         printf("\nStack is empty");
+        exit(1);
     }
     else {
         for(int i = st.top; i >=0; i--) {
