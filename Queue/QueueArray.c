@@ -57,7 +57,7 @@ void Display(struct Queue *q)
         exit(1);
     }
     else {
-        for (int i = q->rear; i >= q->front; i--) {
+        for (int i = q->front; i <= q->rear; i++) {
             printf("%d ", q->Q[i]);
         }
     }
